@@ -10,9 +10,9 @@
 [submodule ".local/share/oh-my-zsh-custom/zsh-autosuggestions"]
 	path = .local/share/oh-my-zsh-custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule "/home/ryan/.config/howl/bundles/howl-nasm"]
-	path = /home/ryan/.config/howl/bundles/howl-nasm
+[submodule ".config/howl/bundles/howl-nasm"]
+	path = .config/howl/bundles/howl-nasm
 	url = https://github.com/refi64/howl-nasm.git
-[submodule "/home/ryan/.config/howl/bundles/miku-edit"]
-	path = /home/ryan/.config/howl/bundles/miku-edit
+[submodule ".config/howl/bundles/miku-edit"]
+	path = .config/howl/bundles/miku-edit
 	url = https://github.com/refi64/miku-edit.git
