@@ -16,3 +16,6 @@
 [submodule ".config/howl/bundles/miku-edit"]
 	path = .config/howl/bundles/miku-edit
 	url = https://github.com/refi64/miku-edit.git
+[submodule ".SpaceVim"]
+	path = .SpaceVim
+	url = https://github.com/SpaceVim/SpaceVim.git
