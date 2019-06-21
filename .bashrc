@@ -17,4 +17,4 @@ fi
 alias l="ls -F"
 alias ll="ls -lF"
 
-[ -f .bashrc.local.sh ] && . .bashrc.local.sh
+[ -f ~/.bashrc.local.sh ] && . ~/.bashrc.local.sh

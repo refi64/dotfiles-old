@@ -102,7 +102,7 @@ fpath+=$HOME/.config/zsh-completions
 
 alias l='ls -F'
 alias la='ls -Fa'
-export PATH=$HOME/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/Android/Sdk/platform-tools:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/Android/Sdk/platform-tools:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/depot_tools:$PATH
 hash io.howl.Editor &>/dev/null && export EDITOR=io.howl.Editor ||:
 export ANDROID_HOME=$HOME/Android/Sdk
 hash flutter &>/dev/null || alias flutter=io.flutter.Flutter
@@ -128,3 +128,4 @@ POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
 POWERLEVEL9K_MODE='nerdfont-complete'
 source ~/.local/share/powerlevel10k/powerlevel10k.zsh-theme
 # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status "${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[@]}")
+eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)

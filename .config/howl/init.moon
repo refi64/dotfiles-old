@@ -23,6 +23,12 @@ mode.register
   create: -> {}
 
 mode.register
+  name: 'systemd'
+  extensions: {'service', 'target', 'mount', 'slice'}
+  parent: 'ini'
+  create: -> {}
+
+mode.register
   name: 'meson'
   patterns: { 'meson.build', 'meson_options.txt' }
   parent: 'python'
@@ -37,7 +43,14 @@ mode.register
 mode.register
   name: 'bazel'
   extensions: {'bzl', 'BUILD'}
-  patterns: { '^BUILD$', '^WORKSPACE$' }
+  patterns: { 'BUILD$', 'WORKSPACE$' }
+  parent: 'python'
+  create: -> {}
+
+mode.register
+  name: 'gn'
+  extensions: {'gn', 'gni'}
+  patterns: { '.gn$' }
   parent: 'python'
   create: -> {}
 
