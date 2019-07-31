@@ -32,6 +32,9 @@ auto-completion-return-key-behavior = "complete"
 auto-completion-tab-key-behavior = "smart"
 
 [[layers]]
+name = 'lsp'
+
+[[layers]]
 name = 'shell'
 default_position = 'top'
 default_height = 30
@@ -43,3 +46,5 @@ enable = false
 [[layers]]
 name = 'lang#nim'
 
+[[layers]]
+name = 'lang#haskell'

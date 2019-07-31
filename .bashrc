@@ -14,7 +14,7 @@ if [ ! -f /.flatpak-info ]; then
   export PS1='$(echo -e "\[\033[0m\033[2m\033[40m\] $USER@$HOSTNAME:\[\033[44m\]$(pwd) \[\033[0m\033[32m\] $ \[\033[0m\]")'
 fi
 
-alias l="ls -F"
-alias ll="ls -lF"
+alias l="ls -F --color=auto"
+alias ll="ls -lF --color=auto"
 
 [ -f ~/.bashrc.local.sh ] && . ~/.bashrc.local.sh

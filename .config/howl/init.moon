@@ -6,7 +6,7 @@ ffi.cdef [[
   int execvp(const char *file, const char *const argv[]);
 ]]
 
-config.font = 'Roboto Mono'
+config.font = 'RobotoMono Nerd Font'
 config.inspectors_on_idle = ''
 config.theme = 'Miku Dark'
 
@@ -42,7 +42,7 @@ mode.register
 
 mode.register
   name: 'bazel'
-  extensions: {'bzl', 'BUILD'}
+  extensions: {'bazel', 'bzl', 'BUILD'}
   patterns: { 'BUILD$', 'WORKSPACE$' }
   parent: 'python'
   create: -> {}
@@ -59,6 +59,9 @@ mode.register
   patterns: { '^PKGBUILD$' }
   parent: 'bash'
   create: -> {}
+
+mode.configure 'bazel',
+  indent: 2
 
 command.register
   name: 'open-settings'

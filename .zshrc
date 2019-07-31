@@ -102,23 +102,18 @@ fpath+=$HOME/.config/zsh-completions
 
 alias l='ls -F'
 alias la='ls -Fa'
-export PATH=$HOME/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/Android/Sdk/platform-tools:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/depot_tools:$PATH
+export PATH=$HOME/bin:$HOME/.poetry/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/depot_tools:$HOME/.yarn/bin:$PATH:$HOME/Android/Sdk/platform-tools:$HOME/code/netpull/bazel-bin:$HOME/.pub-cache/bin:$HOME/go/bin
 hash io.howl.Editor &>/dev/null && export EDITOR=io.howl.Editor ||:
 export ANDROID_HOME=$HOME/Android/Sdk
 hash flutter &>/dev/null || alias flutter=io.flutter.Flutter
 alias heroku=com.heroku.Heroku
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/var/home/ryan/google-cloud-sdk/path.zsh.inc' ]; then . '/var/home/ryan/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/var/home/ryan/google-cloud-sdk/completion.zsh.inc' ]; then . '/var/home/ryan/google-cloud-sdk/completion.zsh.inc'; fi
-
 export KUBECONFIG=$HOME/kubernetes/config
 
 export ANDROID_NDK=$HOME/Android/Sdk/ndk-bundle
+export ANDROID_NDK_HOME=$ANDROID_NDK
 
-hash nvim &>/dev/null || alias nvim=io.neovim.nvim
+#hash nvim &>/dev/null || alias nvim=io.neovim.nvim
 
 haste() { a=$(cat); curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}'; }
 
@@ -126,6 +121,20 @@ POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND=white
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
 POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv vcs)
 source ~/.local/share/powerlevel10k/powerlevel10k.zsh-theme
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status "${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[@]}")
-eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+#[ -d $HOME/perl5/lib/perl5 ] && eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib) ||:
+
+export CC=clang
+export CXX=clang++
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+
+virtualenvwrapper() {
+  . ~/.local/bin/virtualenvwrapper.sh
+}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/var/home/ryan/google-cloud-sdk/path.zsh.inc' ]; then . '/var/home/ryan/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/var/home/ryan/google-cloud-sdk/completion.zsh.inc' ]; then . '/var/home/ryan/google-cloud-sdk/completion.zsh.inc'; fi
