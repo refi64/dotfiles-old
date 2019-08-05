@@ -1,4 +1,4 @@
-import app, command, config, mode, signal from howl
+import app, command, config, mode from howl
 import File from howl.io
 
 ffi = require 'ffi'
@@ -20,12 +20,6 @@ mode.register
   name: 'crystal'
   extensions: {'cr'}
   parent: 'ruby'
-  create: -> {}
-
-mode.register
-  name: 'systemd'
-  extensions: {'service', 'target', 'mount', 'slice'}
-  parent: 'ini'
   create: -> {}
 
 mode.register
