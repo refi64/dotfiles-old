@@ -24,11 +24,12 @@
     enable_tabline_filetype_icon = true
     enable_statusline_display_mode = false
     bootstrap_after = "myspacevim#after"
+    filetree_direction = "left"
 
 # Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
-auto-completion-return-key-behavior = "complete"
+auto-completion-return-key-behavior = "smart"
 auto-completion-tab-key-behavior = "smart"
 
 [[layers]]

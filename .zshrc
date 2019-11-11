@@ -65,6 +65,8 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
+  nix-shell
+  #nix-completions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -100,9 +102,20 @@ fpath+=$HOME/.config/zsh-completions
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias l='ls -F'
-alias la='ls -Fa'
-export PATH=$HOME/bin:$HOME/.poetry/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/depot_tools:$HOME/.yarn/bin:$PATH:$HOME/Android/Sdk/platform-tools:$HOME/code/netpull/bazel-bin:$HOME/.pub-cache/bin:$HOME/go/bin
+if hash exa 2>/dev/null; then
+  alias l='exa -F'
+  alias ll='exa -Fl --git'
+  alias la='exa -Fa'
+else
+  alias l='ls -F'
+  alias ll='ls -Fl'
+  alias la='ls -Fa'
+fi
+
+export PATH=$HOME/bin:$HOME/.poetry/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:$PATH:$HOME/depot_tools:$HOME/Android/Sdk/platform-tools:$HOME/code/netpull/bazel-bin:$HOME/.pub-cache/bin:$HOME/go/bin
+if [[ -d /usr/lib/dart/bin ]]; then
+  export PATH="$PATH:/usr/lib/dart/bin"
+fi
 hash io.howl.Editor &>/dev/null && export EDITOR=io.howl.Editor ||:
 export ANDROID_HOME=$HOME/Android/Sdk
 hash flutter &>/dev/null || alias flutter=io.flutter.Flutter
@@ -121,8 +134,15 @@ POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND=white
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
 POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir custom_wine custom_nix virtualenv vcs)
+POWERLEVEL9K_CUSTOM_WINE="[ -n \"\$WINEPREFIX\" ] && echo 🍷 \$WINEPREFIX | sed \"s|^\$HOME|~|\""
+POWERLEVEL9K_CUSTOM_WINE_BACKGROUND=blue
+POWERLEVEL9K_CUSTOM_WINE_FOREGROUND=black
+POWERLEVEL9K_CUSTOM_NIX="[ -n \"\$IN_NIX_SHELL\" ] && echo ❄ \${NIX_SHELL_PACKAGES:-\$name}"
+POWERLEVEL9K_CUSTOM_NIX_BACKGROUND=blue
+POWERLEVEL9K_CUSTOM_NIX_FOREGROUND=black
 source ~/.local/share/powerlevel10k/powerlevel10k.zsh-theme
+
 #[ -d $HOME/perl5/lib/perl5 ] && eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib) ||:
 
 export CC=clang
@@ -133,8 +153,25 @@ virtualenvwrapper() {
   . ~/.local/bin/virtualenvwrapper.sh
 }
 
+export PATH="$PATH:/home/ryan/.dotnet/tools"
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/var/home/ryan/google-cloud-sdk/path.zsh.inc' ]; then . '/var/home/ryan/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/var/home/ryan/google-cloud-sdk/completion.zsh.inc' ]; then . '/var/home/ryan/google-cloud-sdk/completion.zsh.inc'; fi
+
+export NIX_IGNORE_SYMLINK_STORE=1
+[[ -d ~/.nix-profile ]] && . ~/.nix-profile/etc/profile.d/nix.sh ||:
+
+export ANSIBLE_FORCE_COLOR=true
+
+pywork() {
+  . ~/.local/bin/virtualenvwrapper.sh
+
+  if [ -d "$HOME/.virtualenvs/$1" ]; then
+    workon "$1"
+  else
+    mkvirtualenv "$1"
+  fi
+}

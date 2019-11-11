@@ -19,3 +19,9 @@
 [submodule ".SpaceVim"]
 	path = .SpaceVim
 	url = https://github.com/SpaceVim/SpaceVim.git
+[submodule ".local/share/oh-my-zsh-custom/plugins/nix-shell"]
+	path = .local/share/oh-my-zsh-custom/plugins/nix-shell
+	url = https://github.com/chisui/zsh-nix-shell
+[submodule ".local/share/oh-my-zsh-custom/plugins/nix-completions"]
+	path = .local/share/oh-my-zsh-custom/plugins/nix-completions
+	url = https://github.com/spwhitt/nix-zsh-completions

@@ -9,6 +9,7 @@ ffi.cdef [[
 config.font = 'RobotoMono Nerd Font'
 config.inspectors_on_idle = ''
 config.theme = 'Miku Dark'
+config.cleanup_close_buffers_after = 99999
 
 mode.configure 'python',
   indent: 4
