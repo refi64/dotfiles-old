@@ -1,0 +1,20 @@
+{
+    "window.zoomLevel": 5,
+    "window.titleBarStyle": "custom",
+    "editor.tabSize": 2,
+    "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+    "extensions.ignoreRecommendations": false,
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "editor.formatOnSave": true,
+    "editor.fontLigatures": true,
+    "go.useLanguageServer": true,
+    "python.jediEnabled": false,
+    "files.trimTrailingWhitespace": true,
+    "workspace-manager.includeGlobPattern": [
+        "/home/ryan/workspace"
+    ],
+    "editor.smoothScrolling": true,
+    "debug.console.fontSize": 12
+}

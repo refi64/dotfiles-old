@@ -66,8 +66,12 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
   nix-shell
-  #nix-completions
+  bk-zsh
+  # nix-completions
 )
+
+BK_ZSH_P9K_INTEGRATION=true
+BK_ZSH_SHOW_SAME_BRANCH=true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,7 +116,13 @@ else
   alias la='ls -Fa'
 fi
 
-export PATH=$HOME/bin:$HOME/.poetry/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:$PATH:$HOME/depot_tools:$HOME/Android/Sdk/platform-tools:$HOME/code/netpull/bazel-bin:$HOME/.pub-cache/bin:$HOME/go/bin
+alias ip='ip -c'
+
+# hash bk 2>/dev/null || alias bk=org.bitkeeper.BitKeeper
+
+setopt extendedglob
+
+export PATH=$HOME/bin:$HOME/.poetry/bin:/var/lib/bluecap/exports/bin:$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$HOME/.cargopak/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:$PATH:$HOME/depot_tools:$HOME/Android/Sdk/platform-tools:$HOME/code/netpull/bazel-bin:$HOME/.pub-cache/bin:$HOME/go/bin:$HOME/flutter/bin
 if [[ -d /usr/lib/dart/bin ]]; then
   export PATH="$PATH:/usr/lib/dart/bin"
 fi
@@ -121,7 +131,7 @@ export ANDROID_HOME=$HOME/Android/Sdk
 hash flutter &>/dev/null || alias flutter=io.flutter.Flutter
 alias heroku=com.heroku.Heroku
 
-export KUBECONFIG=$HOME/kubernetes/config
+export KUBECONFIG=$HOME/cloud/tencent-config.yaml
 
 export ANDROID_NDK=$HOME/Android/Sdk/ndk-bundle
 export ANDROID_NDK_HOME=$ANDROID_NDK
@@ -131,16 +141,21 @@ export ANDROID_NDK_HOME=$ANDROID_NDK
 haste() { a=$(cat); curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}'; }
 
 POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND=white
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=false
 POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir custom_wine custom_nix virtualenv vcs)
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir custom_wine custom_nix virtualenv vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status context dir custom_wine custom_nix virtualenv vcs)
 POWERLEVEL9K_CUSTOM_WINE="[ -n \"\$WINEPREFIX\" ] && echo 🍷 \$WINEPREFIX | sed \"s|^\$HOME|~|\""
 POWERLEVEL9K_CUSTOM_WINE_BACKGROUND=blue
 POWERLEVEL9K_CUSTOM_WINE_FOREGROUND=black
 POWERLEVEL9K_CUSTOM_NIX="[ -n \"\$IN_NIX_SHELL\" ] && echo ❄ \${NIX_SHELL_PACKAGES:-\$name}"
 POWERLEVEL9K_CUSTOM_NIX_BACKGROUND=blue
 POWERLEVEL9K_CUSTOM_NIX_FOREGROUND=black
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_VCS_BACKENDS=(git bk hg)
+# POWERLEVEL9K_SHOW_CHANGESET=true
 source ~/.local/share/powerlevel10k/powerlevel10k.zsh-theme
 
 #[ -d $HOME/perl5/lib/perl5 ] && eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib) ||:
@@ -166,12 +181,20 @@ export NIX_IGNORE_SYMLINK_STORE=1
 
 export ANSIBLE_FORCE_COLOR=true
 
+export PLAN9=/home/ryan/code/plan9port
+export PATH=$PATH:$PLAN9/bin
+
+export BK_HOST=refi64.com
+export BK_USER=ryan
+
 pywork() {
   . ~/.local/bin/virtualenvwrapper.sh
 
   if [ -d "$HOME/.virtualenvs/$1" ]; then
     workon "$1"
   else
-    mkvirtualenv "$1"
+    mkvirtualenv "$1" -p python$2
   fi
+
+  export MYPY_PATH="$(python3 -c 'import sys; print(":".join(sys.path[1:]))')"
 }

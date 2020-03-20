@@ -18,3 +18,9 @@ alias l="ls -F --color=auto"
 alias ll="ls -lF --color=auto"
 
 [ -f ~/.bashrc.local.sh ] && . ~/.bashrc.local.sh
+
+export PATH="$PATH:/home/ryan/.komodoide/12.0/XRE/state" # ActiveState State Tool
+
+export PATH="$PATH:/home/ryan/.var/app/com.activestate.KomodoIDE/data/komodoide/12.0/XRE/state" # ActiveState State Tool
+
+export PATH="$PATH:/home/ryan/.var/app/com.activestate.KomodoIDE/data/komodoide/12.0/XRE/state" # ActiveState State Tool

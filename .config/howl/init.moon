@@ -6,7 +6,10 @@ ffi.cdef [[
   int execvp(const char *file, const char *const argv[]);
 ]]
 
-config.font = 'RobotoMono Nerd Font'
+-- config.font = 'RobotoMono Nerd Font'
+-- config.font = 'FiraCode Nerd Font'
+config.font = 'JetBrainsMono Nerd Font Mono'
+config.font_size = 10
 config.inspectors_on_idle = ''
 config.theme = 'Miku Dark'
 config.cleanup_close_buffers_after = 99999
